@@ -1,0 +1,42 @@
+extends layout
+
+block content
+  div.ps-container.ps-product-container(data-ps-sku= product.sku)
+    div.ps-product-image-container
+      img.ps-product-image(src=product.image_url)
+    div.ps-product-details-container
+      div.ps-product-details
+        p.ps-product-name= product.name
+        p.ps-product-price(data-ps-price=product.price) $!{product.price.toFixed(2)}
+        a.ps-cta-button.ps-cta-button--transparent.js-add-to-wishlist(href='#') Add to Wishlist
+        a.ps-cta-button.js-add-to-cart(href='#') Add to Cart 
+        hr.ps-product-details-divider
+        if product.description
+          p.ps-product-details-description-title Description
+            p.ps-product-details-description= product.description
+  if recommendations
+    div.ps-container
+      p.ps-product-recommendations-title More from this collection
+    div.ps-product-listing-container
+      each product in recommendations  
+        a.ps-prodcut-listing-item(href=`/product/${product.sku}`)
+          img.ps-prodcut-listing-item__image(src=product.image_url)
+          p.ps-prodcut-listing-item__name= product.name
+          p.ps-prodcut-listing-item__description= product.description
+          p.ps-prodcut-listing-item__price $!{product.price.toFixed(2)}
+  div.ps-backdrop.ps-hidden
+  div.ps-add-to-cart-overlay.ps-hidden
+    div.js-close-overlay
+      svg(xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18")
+        path(d="M185.014,186.3l1.286-1.286-7.715-7.714,7.715-7.715-1.286-1.285-7.714,7.715-7.715-7.715-1.285,1.285,7.715,7.715-7.715,7.714,1.285,1.286,7.715-7.715Z" transform="translate(-168.3 -168.3)")
+    div.ps-add-to-cart-title Product added successfully!
+    div.ps-add-to-cart-content
+      div.ps-add-to-cart-image-container
+        img.ps-add-to-cart-image(src=product.image_url)
+      div.ps-add-to-cart-details-container
+        p.ps-add-to-cart-details__name= product.name
+        p.ps-add-to-cart-details__price $!{product.price.toFixed(2)}
+    div.ps-add-to-cart-cta
+      a.ps-cta-button.ps-cta-button--transparent.js-continue-shopping(href='#') Continue Shopping
+      a.ps-cta-button(href='/cart') View Cart
+  script(src="/javascripts/product.js")

@@ -1,0 +1,59 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(http-equiv="X-UA-Compatible", content="ie=edge")
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    title Petshop
+  body
+    div.ps-container
+      header(class=invertedHeader? "ps-navigation-container ps-navigation-container--inverted" : "ps-navigation-container")
+        div.ps-navigation-item
+          a.ps-navigation-link.ps-logo(href='/') Petshop.
+        div.ps-navigation-item
+          a.ps-navigation-link(href="/category/toys") Toys
+          a.ps-navigation-link(href="/category/clothing") Clothes
+        div.ps-navigation-item.ps-navigation-item--condensed
+          a.ps-navigation-link.ps-icon.ps-icon__search(href="#")
+            svg(xmlns="http://www.w3.org/2000/svg" width="26" height="26.93" viewBox="0 0 26 26.93")
+              path(d="M26.589,24.529l-6.409-6.666a10.869,10.869,0,1,0-8.322,3.883,10.757,10.757,0,0,0,6.229-1.968L24.545,26.5a1.418,1.418,0,1,0,2.044-1.966ZM11.857,2.836A8.037,8.037,0,1,1,3.82,10.873,8.046,8.046,0,0,1,11.857,2.836Z" transform="translate(-0.984)")
+          a.ps-navigation-link.ps-icon.ps-icon__cart(href="/cart")
+            svg(xmlns="http://www.w3.org/2000/svg" width="33.902" height="32.315" viewBox="0 0 33.902 32.315")
+              path(d="M33.472,4.835a1.752,1.752,0,0,0-1.331-.619H7.8L7.46,2.126A1.771,1.771,0,0,0,5.724.625H1.761A1.777,1.777,0,0,0,0,2.42a1.777,1.777,0,0,0,1.761,1.8H4.232L7.508,24.258a1.585,1.585,0,0,0,.079.223,1.538,1.538,0,0,0,.1.271,1.766,1.766,0,0,0,.211.321,1.826,1.826,0,0,0,.167.2,1.69,1.69,0,0,0,.34.233,1.683,1.683,0,0,0,.2.117,1.681,1.681,0,0,0,.646.135H28.618a1.8,1.8,0,0,0,0-3.591H10.738l-.292-1.8H30.379a1.772,1.772,0,0,0,1.744-1.54L33.884,6.266A1.822,1.822,0,0,0,33.472,4.835ZM30.11,7.806l-.5,3.591H23.335V7.806Zm-8.536,0V11.4H16.29V7.806Zm0,5.386v3.591H16.29V13.192ZM14.529,7.806V11.4H9.246a.833.833,0,0,0-.261.054l-.6-3.644ZM9.271,13.192h5.259v3.591H9.857Zm14.064,3.591V13.192h6.02l-.5,3.591Z" transform="translate(0 -0.625)")
+              ellipse(cx="2.642" cy="2.693" rx="2.642" ry="2.693" transform="translate(9.246 26.929)")
+              ellipse(cx="2.642" cy="2.693" rx="2.642" ry="2.693" transform="translate(25.096 26.929)")
+    main
+      block content
+    footer.ps-footer
+      div.ps-container.ps-navigation-container.ps-navigation-container--inverted
+        div.ps-navigation-item
+          a.ps-navigation-link.ps-logo(href="/") Petshop.
+        div.ps-navigation-item.ps-navigation-item--x-condensed
+          a.ps-navigation-link.ps-icon.ps-icon__instagram(href="/")
+            svg(xmlns="http://www.w3.org/2000/svg" width="21.279" height="21.279" viewBox="0 0 21.279 21.279")
+              path(d="M14.629,0H6.65A6.65,6.65,0,0,0,0,6.65v7.98a6.65,6.65,0,0,0,6.65,6.65h7.98a6.65,6.65,0,0,0,6.65-6.65V6.65A6.65,6.65,0,0,0,14.629,0Zm4.655,14.629a4.66,4.66,0,0,1-4.655,4.655H6.65a4.66,4.66,0,0,1-4.655-4.655V6.65A4.66,4.66,0,0,1,6.65,1.995h7.98A4.66,4.66,0,0,1,19.284,6.65Z")
+              path(d="M133.32,128a5.32,5.32,0,1,0,5.32,5.32A5.32,5.32,0,0,0,133.32,128Zm0,8.645a3.325,3.325,0,1,1,3.325-3.325A3.329,3.329,0,0,1,133.32,136.645Z" transform="translate(-122.68 -122.68)")
+              ellipse(cx="0.709" cy="0.709" rx="0.709" ry="0.709" transform="translate(15.649 4.212)")
+          a.ps-navigation-link.ps-icon.ps-icon__facebook(href="/")
+            svg(xmlns="http://www.w3.org/2000/svg"  width="12.431" height="22.992" viewBox="0 0 12.431 22.992")
+              path(d="M34.04,0,31.058,0c-3.35,0-5.514,2.221-5.514,5.658V8.267h-3a.469.469,0,0,0-.469.469v3.78a.469.469,0,0,0,.469.469h3v9.538a.469.469,0,0,0,.469.469h3.911a.469.469,0,0,0,.469-.469V12.985H33.9a.469.469,0,0,0,.469-.469V8.736a.469.469,0,0,0-.469-.469H30.393V6.056c0-1.063.253-1.6,1.638-1.6h2.009a.469.469,0,0,0,.469-.469V.474A.469.469,0,0,0,34.04,0Z" transform="translate(-22.077)")
+          a.ps-navigation-link.ps-icon.ps-icon__youtube(href="/")
+            svg(xmlns="http://www.w3.org/2000/svg" width="25.952" height="18.264" viewBox="0 0 25.952 18.264")
+              path(d="M24.941,47.485c-.937-1.114-2.666-1.568-5.969-1.568H6.981c-3.379,0-5.138.484-6.071,1.669C0,48.742,0,50.445,0,52.8V57.3c0,4.567,1.08,6.885,6.981,6.885h11.99c2.864,0,4.452-.4,5.479-1.384,1.053-1.008,1.5-2.653,1.5-5.5V52.8C25.952,50.317,25.882,48.6,24.941,47.485Zm-8.279,8.185-5.445,2.846a.837.837,0,0,1-1.225-.742V52.1a.837.837,0,0,1,1.223-.743l5.445,2.827a.837.837,0,0,1,0,1.485Z" transform="translate(0 -45.917)")
+    if (overlay)
+      div.ps-backdrop
+      div.ps-overlay
+        div.js-close-overlay
+          svg(xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18")
+            path(d="M185.014,186.3l1.286-1.286-7.715-7.714,7.715-7.715-1.286-1.285-7.714,7.715-7.715-7.715-1.285,1.285,7.715,7.715-7.715,7.714,1.285,1.286,7.715-7.715Z" transform="translate(-168.3 -168.3)")
+        div.ps-overlay-content
+          div.ps-overlay-image-container
+            img.ps-overlay-image(src= overlay.image)
+          div.ps-overlay-details-container
+            div.ps-overlay-details
+              p.ps-overlay-details__title !{overlay.title}
+              p.ps-overlay-details__content !{overlay.content}
+              div.ps-overlay-cta
+                a.ps-cta-button.ps-cta-button--no-side-margins(data-dy-decision-id= overlay.decisionId href=overlay.link) !{overlay.cta}
+    script(src="/javascripts/main.js")

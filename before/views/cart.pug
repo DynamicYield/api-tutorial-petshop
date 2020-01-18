@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  div.ps-container
+    h1 Cart
+    if (products.length > 0)
+      table(width="100%" border="1")
+        thead
+          tr 
+            th #{itemsInCart} Items in cart
+            th Quantity
+            th Price
+        tbody
+          each product in products
+            tr
+              td
+                a(href= product.url)
+                  img(src=product.image_url)
+                  span= product.name
+              td= product.qty
+              td $!{(product.qty * product.price).toFixed(2)}
+      div.ps-cart-summary
+        h2 Total: $#{cartValue}
+        a.ps-cta-button.purchase(href='/cart/purchase') Purchase
+    else
+      p You've got nothing in the cart, browser more #[a.link(href='/') here].

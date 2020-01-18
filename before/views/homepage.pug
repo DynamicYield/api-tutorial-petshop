@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  div.ps-hero-container
+    div.ps-hero-banner
+      img.ps-hero-banner-image(src= heroBanner.image)
+      div.ps-hero-banner-content
+        p.ps-hero-banner-title= heroBanner.title
+        p.ps-hero-banner-subtitle !{heroBanner.subtitle}
+        a.ps-cta-button(href= heroBanner.link) #{heroBanner.cta}
+  div.ps-testimonial-container
+    p.ps-testimonial-text “He just went crazy for it! First time he plays with the same toy for days”
+    p.ps-testimonial-author Lena Davidson, David the cat’s Mom
+  if recommendations
+    div.ps-container
+      p.ps-product-recommendations-title We think you’ll like…
+    div.ps-product-listing-container
+      each product in recommendations  
+        a.ps-prodcut-listing-item(href=`/product/${product.sku}`)
+          img.ps-prodcut-listing-item__image(src=product.image_url)
+          p.ps-prodcut-listing-item__name= product.name
+          p.ps-prodcut-listing-item__description= product.description
+          p.ps-prodcut-listing-item__price $!{product.price.toFixed(2)}

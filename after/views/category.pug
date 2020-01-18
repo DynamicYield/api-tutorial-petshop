@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  div.ps-product-listing-container
+    each product in products  
+      a.ps-prodcut-listing-item(href=`/product/${product.sku}`)
+        img.ps-prodcut-listing-item__image(src=product.image_url)
+        p.ps-prodcut-listing-item__name= product.name
+        p.ps-prodcut-listing-item__description= product.description
+        p.ps-prodcut-listing-item__price $!{product.price.toFixed(2)}
+  if pagination
+    div.ps-pagination-container
+      if pagination.prev
+        a.ps-pagination(href=`/category/${pagination.category}/?page=${pagination.prev}`)
+          svg(xmlns="http://www.w3.org/2000/svg" width="21.842" height="13.622" viewBox="0 0 21.842 13.622")
+            path(d="M14.708,4.879a.842.842,0,0,0-1.1,0,.635.635,0,0,0,0,.966l5.582,4.95H.771a.693.693,0,1,0,0,1.377H19.189l-5.582,4.941a.645.645,0,0,0,0,.976.842.842,0,0,0,1.1,0l6.9-6.122a.621.621,0,0,0,0-.966Z" transform="translate(21.842 18.296) rotate(180)" fill="#111")
+      span.ps-pagination= pagination.currentPage
+      if pagination.next
+        a.ps-pagination(href=`/category/${pagination.category}/?page=${pagination.next}`)
+          svg(xmlns="http://www.w3.org/2000/svg" width="21.842" height="13.622" viewBox="0 0 21.842 13.622")
+            path(d="M14.708,4.879a.842.842,0,0,0-1.1,0,.635.635,0,0,0,0,.966l5.582,4.95H.771a.693.693,0,1,0,0,1.377H19.189l-5.582,4.941a.645.645,0,0,0,0,.976.842.842,0,0,0,1.1,0l6.9-6.122a.621.621,0,0,0,0-.966Z" transform="translate(0 -4)" fill="#111")
