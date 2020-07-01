@@ -184,6 +184,7 @@ body {
   margin: 2%;
   margin-bottom: 12px;
   text-decoration: none;
+  position:relative;
 }
 
 .ps-prodcut-listing-item:nth-child(4n) {
@@ -419,4 +420,81 @@ body {
 .ps-cta-button--no-side-margins {
   margin-left: 0;
   margin-right: 0;
+}
+
+.product-badge {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  direction: rtl;
+  background-color: #dc1e4d;
+  top: 0;
+  position: absolute;
+  flex-direction: column;
+  z-index: 100;
+  right: 0.5rem;
+  border-bottom-right-radius: 50%;
+  border-bottom-left-radius: 50%;
+  box-shadow: 1px 2px 14px 5px #00000070;
+  padding: 0.5rem;
+}
+.product-badge:focus {
+  outline: none;
+}
+.product-badge label {
+  margin-top: .3rem;
+  margin-bottom: .3rem;
+  color: #fff;
+  cursor: pointer;
+}
+.product-badge label#first-title {
+  font-size: 1rem;
+}
+.product-badge label#second-title {
+  font-size: .8rem;
+}
+.product-badge .fa-image {
+  color: #fff;
+  font-size: 2.5rem;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  border: 2px dotted #fff;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin: .5rem 0;
+  cursor: pointer;
+}
+
+
+.bounce {
+  animation: bounce 0.5s;
+  animation-direction: alternate;
+  animation-timing-function: cubic-bezier(0.5, 0.05, 1, 0.5);
+  animation-iteration-count: infinite;
+  -webkit-animation-name: bounce;
+  -webkit-animation-duration: 0.5s;
+  -webkit-animation-direction: alternate;
+  -webkit-animation-timing-function: cubic-bezier(0.5, 0.05, 1, 0.5);
+  -webkit-animation-iteration-count: infinite;
+}
+
+@keyframes bounce {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 3px, 0);
+  }
+}
+@-webkit-keyframes bounce {
+  from {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    -webkit-transform: translate3d(0, 3px, 0);
+    transform: translate3d(0, 3px, 0);
+  }
 }

@@ -22,6 +22,16 @@ const defaultHeroBanner = {
 
 const defaultRecommendations = products.getRandom(4);
 
+let defaultBadge = {
+  color: "#dc1e4d",
+  right: "0.1rem",
+  title: "Summer Sale",
+  subtitle: "!Only today",
+  iconCode: "🔥" 
+}
+defaultRecommendations[0].badge = defaultBadge;
+
+
 const defaultOverlay = {
   image: 'http://cdn.dynamicyield.com/petshop/images/erda-estremera-581452-unsplash.png',
   title: 'Invest in your pet',
@@ -34,6 +44,7 @@ async function getPageContent(req) {
   req.dyContext.page.type = 'HOMEPAGE';
   const apiResponse = await DYAPI.choose(req.userId, req.sessionId, req.dyContext, 
                                     ['HP Hero Banner', 'HP Recommendations', 'HP Overlays']);
+
   const content = {
     heroBanner: apiResponse['HP Hero Banner'] || defaultHeroBanner,
     recommendations: apiResponse['HP Recommendations'] || defaultRecommendations,
