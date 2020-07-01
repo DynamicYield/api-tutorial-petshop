@@ -3,11 +3,11 @@ const products = require('../models/product');
 const DYAPI = require('../DYAPI');
 
 router.get('/', async (req, res) => {
-  const { heroBanner, recommendations, overlay } = await getPageContent(req);
+  const { heroBanner, recommendationsArray, overlay } = await getPageContent(req);
   res.render('homepage', {
     overlay,
     heroBanner,
-    recommendations,
+    recommendationsArray,
     invertedHeader: true,
   });
 });
@@ -30,15 +30,26 @@ const defaultOverlay = {
   link: '/category/all',
 };
 
+
+let campaigns = ['Women Shoes','Women Skirts','Women Accessories','Women Pants','Women Coats']
 async function getPageContent(req) {
   req.dyContext.page.type = 'HOMEPAGE';
+  const widgetDecision = await DYAPI.choose(req.userId, req.sessionId, req.dyContext, 
+    ["Widgets Decision"]);
+  
+  console.log(widgetDecision['Widgets Decision']["widgets"])
+  campaigns = widgetDecision['Widgets Decision']["widgets"].split(',');
   const apiResponse = await DYAPI.choose(req.userId, req.sessionId, req.dyContext, 
-                                    ['HP Hero Banner', 'HP Recommendations', 'HP Overlays']);
+                                   campaigns);
+  
+  let recsArray = [];
+  for ( let i in campaigns){
+    recsArray.push(apiResponse[campaigns[i]]|| []);
+  }
   const content = {
-    heroBanner: apiResponse['HP Hero Banner'] || defaultHeroBanner,
-    recommendations: apiResponse['HP Recommendations'] || defaultRecommendations,
-    overlay: apiResponse['HP Overlay'],
+    recommendationsArray: recsArray,
   };
+  console.log(content)
   return content;
 }
 

@@ -2,11 +2,11 @@ const router = require('express').Router();
 const products = require('../models/product');
 
 router.get('/', async (req, res) => {
-  const { heroBanner, recommendations, overlay } = await getPageContent(req);
+  const { heroBanner, recommendationsArray, overlay } = await getPageContent(req);
   res.render('homepage', {
     overlay,
     heroBanner,
-    recommendations,
+    recommendationsArray,
     invertedHeader: true,
   });
 });
