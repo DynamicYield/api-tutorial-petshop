@@ -22,7 +22,7 @@ block content
           p.ps-prodcut-listing-item__description= product.description
           p.ps-prodcut-listing-item__price $!{product.price.toFixed(2)}
           if product.badge
-            div.product-badge(style="background-color:product.badge.color;right:product.badge.right")
+            div.product-badge(style="background-color:"+ product.badge.color + ";right:"+ product.badge.right +";")
               label#first-title= product.badge.title
               label#second-title=  product.badge.subtitle
               i.fa.fa-image
