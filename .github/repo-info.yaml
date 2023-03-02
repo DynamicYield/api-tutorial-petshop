@@ -1,0 +1,22 @@
+# The following GitHub teams can be used as owners within this file:
+# devops
+# devsecops
+# frontend
+# qa
+# qsr
+# noc
+# recs
+# datafeeds
+# cdp
+# analytics
+# dy4dev
+# messaging
+Owner: dy4dev
+# The following environments can be used within this file:
+# production
+# non-production
+#
+# production repository - application/package (or part of) that is deployed in AWS.
+# non-production repository - docs, template, tests, local environment, ci/cd code, etc.
+Environment: non-production
+# In case you're not sure or need further assistance please reach out to DevOps
