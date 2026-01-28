@@ -1,16 +1,22 @@
-const request = require('request-promise-native');
+const axios = require('axios');
+require('dotenv').config();
 
-const APIKEY = 'YOUR-KEY-HERE';
-const DYHOST = 'https://dy-api.com';
+const APIKEY = process.env.DY_API_KEY || 'YOUR-KEY-HERE';
+const DYHOST = process.env.DY_HOST || 'https://dy-api.com';
+
+const apiClient = axios.create({
+  baseURL: DYHOST,
+  headers: {
+    'DY-API-Key': APIKEY,
+    'Content-Type': 'application/json',
+  },
+  timeout: 10000,
+});
 
 async function choose(userId, sessionId, dyContext, selectors = []) {
-  const options = {
-    method: 'POST',
-    uri: `${DYHOST}/v2/serve/user/choose`,
-    headers: {
-      'DY-API-Key': APIKEY,
-    },
-    body: {
+  let variations = {};
+  try {
+    const response = await apiClient.post('/v2/serve/user/choose', {
       selector: {
         names: selectors,
       },
@@ -19,14 +25,8 @@ async function choose(userId, sessionId, dyContext, selectors = []) {
       },
       sessionId,
       context: dyContext,
-    },
-    json: true,
-  };
-
-  let variations = {};
-  try {
-    const response = await request(options);
-    variations = response.choices.reduce(flattenCampaignData, {});
+    });
+    variations = response.data.choices.reduce(flattenCampaignData, {});
     console.log(`Choices by campaign: ${JSON.stringify(variations, null, 2)}`);
   } catch (e) {
     console.error(`ERROR IN CHOOSE: ${e.message}`);
@@ -56,22 +56,13 @@ function flattenCampaignData(res, choice) {
 
 async function reportClick(userId, sessionId, engagement) {
   try {
-    const options = {
-      method: 'POST',
-      url: `${DYHOST}/v2/collect/user/engagement`,
-      headers: {
-        'DY-API-Key': APIKEY,
+    await apiClient.post('/v2/collect/user/engagement', {
+      user: {
+        id: userId,
       },
-      body: {
-        user: {
-          id: userId,
-        },
-        sessionId,
-        engagements: [engagement],
-      },
-      json: true,
-    }
-    const response = await request(options);
+      sessionId,
+      engagements: [engagement],
+    });
     console.log("Engagement reported: " + JSON.stringify(engagement));
   } catch (e) {
     console.error(`ERROR IN ENGAGEMENT: ${e.message}`);
@@ -80,22 +71,13 @@ async function reportClick(userId, sessionId, engagement) {
 
 async function reportEvent(userId, sessionId, event) {
   try {
-    const options = {
-      method: 'POST',
-      url: `${DYHOST}/v2/collect/user/event`,
-      headers: {
-        'DY-API-Key': APIKEY,
+    await apiClient.post('/v2/collect/user/event', {
+      user: {
+        id: userId,
       },
-      body: {
-        user: {
-          id: userId,
-        },
-        sessionId,
-        events: [event],
-      },
-      json: true
-    };
-    const response = await request(options);
+      sessionId,
+      events: [event],
+    });
     console.log("Event reported: " + JSON.stringify(event));
   } catch (e) {
     console.error(`ERROR IN EVENT: ${e.message}`);
