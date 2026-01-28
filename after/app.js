@@ -4,7 +4,10 @@ const path = require('path');
 const cookieSession = require('cookie-session');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const helmet = require('helmet');
 const { v4: uuidv4 } = require('uuid');
+require('dotenv').config();
+
 const homepageRouter = require('./routes/homepage');
 const productsRouter = require('./routes/product');
 const cateogryRouter = require('./routes/category');
@@ -12,6 +15,22 @@ const cartRouter = require('./routes/cart');
 const reportClickRouter = require('./routes/reportClick');
 
 const app = express();
+
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      styleSrc: ["'self'", "'unsafe-inline'", 'cdn.dynamicyield.com'],
+      scriptSrc: ["'self'", "'unsafe-inline'", 'cdn.dynamicyield.com'],
+      imgSrc: ["'self'", 'data:', 'cdn.dynamicyield.com'],
+      connectSrc: ["'self'"],
+      fontSrc: ["'self'"],
+      objectSrc: ["'none'"],
+      mediaSrc: ["'self'"],
+      frameSrc: ["'none'"],
+    },
+  },
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -29,7 +48,12 @@ app.use((req, res, next) => {
   let { userId } = req.cookies;
   if (!userId) {
     userId = uuidv4();
-    res.cookie('userId', userId, { maxAge: 365 * 24 * 60 * 60 * 1000, httpOnly: true });
+    res.cookie('userId', userId, {
+      maxAge: 365 * 24 * 60 * 60 * 1000,
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+    });
   }
   req.userId = userId;
   next();
@@ -39,7 +63,11 @@ app.use((req, res, next) => {
 
 app.use(cookieSession({
   name: 'session',
-  secret: 'somesecretkeyhash',
+  secret: process.env.SESSION_SECRET || 'somesecretkeyhash',
+  maxAge: 365 * 24 * 60 * 60 * 1000,
+  httpOnly: true,
+  secure: process.env.NODE_ENV === 'production',
+  sameSite: 'strict',
 }));
 
 app.use((req, _res, next) => {
@@ -84,11 +112,10 @@ app.use((req, res, next) => {
 // error handler
 app.use((err, req, res, next) => {
   res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : null;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   res.status(err.status || 500);
   res.render('error');
-  next();
 });
 
 module.exports = app;
